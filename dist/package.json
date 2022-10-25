@@ -1,0 +1,10 @@
+{
+    "name": "AbolishFlorida",
+    "version": "1.0.0",
+    "description": "As god intented",
+    "author": "Neil K",
+    "private": true,
+    "scripts": {
+      "postinstall": "npm install express"
+    }
+   }
