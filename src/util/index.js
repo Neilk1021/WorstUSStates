@@ -1,3 +1,4 @@
+
 /**
  * Get the name of the targeted location
  *
@@ -6,6 +7,10 @@
  */
  export function getLocationName(node) {
 	return node && node.attributes.name.value
+}
+
+export function getLocationIndex(node){
+	return Array.from(node.parentElement.children).indexOf(node);
 }
 
 /**

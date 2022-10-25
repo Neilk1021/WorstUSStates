@@ -4,11 +4,13 @@
   <h1>
   Which US State is the Worst?
   </h1>
+
+
   <br><br>
     
     <div class="examples__block__map examples__block__map--usa">
       <SvgMap :map="USA" :location-class="getLocationClass" 
-      @mouseover="pointLocation"
+        @mouseover="pointLocation"
 				@mouseout="unpointLocation"
 				@mousemove="moveOnLocation"
 			/>
@@ -21,13 +23,11 @@
 			</div>
 		</div>
 
-    <div class="InfoCont">
     <div class="DividerInfo">
         <vs-divider color="default">Information</vs-divider>
-    </div>
-         <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="8.95">
-    <vs-col vs-offset="4.2" vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
-      <vs-collapse accordion >
+         <vs-row vs-type="flex" vs-justify="center" vs-align="center">
+    <vs-col vs-type="flex" vs-justify="center" vs-align="center">
+      <vs-collapse accordion>
       <vs-collapse-item>
         <div slot="header">
           What are the worst states?
@@ -36,6 +36,7 @@
           Florida, Ohio, California, New York, Texas, Alabama, and Wyoming <a href="https://wyomingisntreal.com/" color = "#ad3939">(not real)</a> are by far the worst states.
           Ohio comes in first with 25.7% of participants deeming it the worst state, in second is Florida with 14.3%, and finally a three way tie for third between California Wyoming and Texas.
       </vs-collapse-item>
+  
       <vs-collapse-item>
         <div slot="header">
           Why make this?
@@ -46,7 +47,7 @@
         <div slot="header">
           About
         </div>
-        Built with <a href="https://vuejs.org/" color = "#ad3939">Vue Js</a> by <a href="https://vuejs.org/" color = "#ad3939"> Neil K </a>
+        Built with <a href="https://vuejs.org/" color = "#ad3939">Vue Js</a> by <a href="https://www.instagram.com/nel_kett/" color = "#ad3939"> Neil K </a>
       </vs-collapse-item>
       
       </vs-collapse>
@@ -60,6 +61,7 @@
 
 <script>
 import { getLocationName } from './util'
+import { getLocationIndex } from './util'
 import { SvgMap } from "vue-svg-map";
 import USA from "@svg-maps/usa";
 
@@ -75,6 +77,7 @@ export default {
       States: [2,12,6,4,10,2,1,0,6,9,3,1,5,4,2,6,4,6,5,1,3,1,3,1,1,3,3,3,4,1,3,5,3,1,7,11,3,1,3,1,1,4,2,10,5,1,3,2,3,5,8],
       pointedLocation: null,
 			tooltipStyle: null,
+      PercentHate: 0 
     };
   },
   mounted(){
@@ -82,8 +85,8 @@ export default {
   },
   methods:{
     pointLocation() {
-			this.pointedLocation = getLocationName(event.target) 
-      
+      this.PercentHate = this.States[getLocationIndex(event.target)]/0.31; 
+			this.pointedLocation = getLocationName(event.target) + " " + this.PercentHate.toFixed(2) + "%";
 		},
 		unpointLocation() {
 			this.pointedLocation = null
@@ -110,7 +113,7 @@ export default {
 
 <style>
 html{
-  background-color: #121212;
+  background-color: #0f0f0f;
 }
 
 #app {
@@ -120,7 +123,7 @@ html{
   text-align: center;
   color: #fff;
   margin-top: 60px;
-  background-color: #121212; 
+  background-color: #0f0f0f; 
 }
 
 .InfoCont{
@@ -153,7 +156,7 @@ a:active {
 }
 
 .DividerInfo{
-  width:50%;
+  width:70%;
   margin:auto;
 }
 
@@ -192,11 +195,10 @@ a:active {
 
        .examples__block__map__tooltip {
         position: fixed;
-        width: 100px;
+        width: 150px;
         padding: 10px;
-        margin-left:55px;
+        margin-left:30px;
         border: 1px solid darkgray;
         background-color: #212121;
       }
-      
 </style>
